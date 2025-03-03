@@ -10,7 +10,7 @@ To set up the ParallelCalc project, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/kareemkamal11/ParallelCalc.git
+   git clone https://github.com/Solomon26014226/ParallelCalc.git
    cd ParallelCalc
    ```
 
