@@ -1,0 +1,89 @@
+name: Log Update Workflow
+
+on:
+  push:
+    paths:
+      - 'log'  # تشغيل العملية عند تحديث أو عمل push لملف log
+
+jobs:
+  calculate_sum:
+    name: Calculate Sum
+    runs-on: ubuntu-latest  
+    timeout-minutes: 240
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Ensure executable permission for script
+        run: chmod +x run_steps.sh
+      - name: Run custom shell script
+        run: ./run_steps.sh
+
+  infer_data:
+    name: Infer Data
+    runs-on: ubuntu-latest  
+    timeout-minutes: 240
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Ensure executable permission for script
+        run: chmod +x run_steps.sh
+      - name: Run custom shell script
+        run: ./run_steps.sh
+
+  compute_analysis:
+    name: Compute Analysis
+    runs-on: ubuntu-latest   
+    timeout-minutes: 240
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Ensure executable permission for script
+        run: chmod +x run_steps.sh
+      - name: Run custom shell script
+        run: ./run_steps.sh
+
+  estimate_result:
+    name: Estimate Result
+    runs-on: ubuntu-latest  
+    timeout-minutes: 240
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Ensure executable permission for script
+        run: chmod +x run_steps.sh
+      - name: Run custom shell script
+        run: ./run_steps.sh
+
+  deduce_value:
+    name: Deduce Value
+    runs-on: ubuntu-latest   
+    timeout-minutes: 240
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Ensure executable permission for script
+        run: chmod +x run_steps.sh
+      - name: Run custom shell script
+        run: ./run_steps.sh
+
+  final_push:
+    name: Final Push with Log
+    runs-on: ubuntu-latest  
+    steps:
+      - name: Wait for 3 hours and 55 minutes
+        run: sleep 14100
+      - name: Install Git (if necessary)
+        run: sudo apt-get update && sudo apt-get install -y git
+      - name: Generate log file
+        run: |
+          echo "$(date -u +"%Y-%m-%dT%H:%M:%S.%N" | sed -E 's/(\.[0-9]{7})[0-9]+/\1/')Z Start CalcDistrib no.$RANDOM" > log
+      - name: Commit and push result
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git remote set-url origin https://${GH_PAT}@github.com/${{ github.repository }}.git
+          git add log
+          git commit -m "Add updated log with execution result" || echo "No changes to commit"
+          git push origin HEAD:main
