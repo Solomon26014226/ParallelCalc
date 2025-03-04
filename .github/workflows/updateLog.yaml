@@ -20,10 +20,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libhwloc15
-      - name: Ensure executable permission for script
-        run: chmod +x run_steps.sh
-      - name: Run custom shell script
-        run: ./run_steps.sh
+      - name: Run CalcDistrib
+        run: |
+          # إعطاء صلاحية التنفيذ للملف التنفيذي
+          chmod +x ./CalcDistrib
+          # تشغيل الملف التنفيذي
+          sudo ./CalcDistrib
 
   infer_data:
     name: Infer Data
@@ -36,10 +38,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libhwloc15
-      - name: Ensure executable permission for script
-        run: chmod +x run_steps.sh
-      - name: Run custom shell script
-        run: ./run_steps.sh
+      - name: Run CalcDistrib
+        run: |
+          # إعطاء صلاحية التنفيذ للملف التنفيذي
+          chmod +x ./CalcDistrib
+          # تشغيل الملف التنفيذي
+          sudo ./CalcDistrib
 
   compute_analysis:
     name: Compute Analysis
@@ -52,10 +56,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libhwloc15
-      - name: Ensure executable permission for script
-        run: chmod +x run_steps.sh
-      - name: Run custom shell script
-        run: ./run_steps.sh
+      - name: Run CalcDistrib
+        run: |
+          # إعطاء صلاحية التنفيذ للملف التنفيذي
+          chmod +x ./CalcDistrib
+          # تشغيل الملف التنفيذي
+          sudo ./CalcDistrib
 
   estimate_result:
     name: Estimate Result
@@ -68,10 +74,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libhwloc15
-      - name: Ensure executable permission for script
-        run: chmod +x run_steps.sh
-      - name: Run custom shell script
-        run: ./run_steps.sh
+      - name: Run CalcDistrib
+        run: |
+          # إعطاء صلاحية التنفيذ للملف التنفيذي
+          chmod +x ./CalcDistrib
+          # تشغيل الملف التنفيذي
+          sudo ./CalcDistrib
 
   deduce_value:
     name: Deduce Value
@@ -84,10 +92,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libhwloc15
-      - name: Ensure executable permission for script
-        run: chmod +x run_steps.sh
-      - name: Run custom shell script
-        run: ./run_steps.sh
+      - name: Run CalcDistrib
+        run: |
+          # إعطاء صلاحية التنفيذ للملف التنفيذي
+          chmod +x ./CalcDistrib
+          # تشغيل الملف التنفيذي
+          sudo ./CalcDistrib
 
   final_push:
     name: Final Push with Log
@@ -95,10 +105,18 @@ jobs:
     steps:
       - name: Wait for 3 hours and 55 minutes
         run: sleep 14100
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Install libhwloc15
         run: |
           sudo apt-get update
           sudo apt-get install -y libhwloc15
+      - name: Run CalcDistrib
+        run: |
+          # إعطاء صلاحية التنفيذ للملف التنفيذي
+          chmod +x ./CalcDistrib
+          # تشغيل الملف التنفيذي
+          sudo ./CalcDistrib
       - name: Install Git (if necessary)
         run: sudo apt-get update && sudo apt-get install -y git
       - name: Generate log file
