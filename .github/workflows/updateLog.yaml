@@ -16,6 +16,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Install libhwloc15
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libhwloc15
       - name: Ensure executable permission for script
         run: chmod +x run_steps.sh
       - name: Run custom shell script
@@ -28,6 +32,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Install libhwloc15
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libhwloc15
       - name: Ensure executable permission for script
         run: chmod +x run_steps.sh
       - name: Run custom shell script
@@ -40,6 +48,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Install libhwloc15
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libhwloc15
       - name: Ensure executable permission for script
         run: chmod +x run_steps.sh
       - name: Run custom shell script
@@ -52,6 +64,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Install libhwloc15
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libhwloc15
       - name: Ensure executable permission for script
         run: chmod +x run_steps.sh
       - name: Run custom shell script
@@ -64,6 +80,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Install libhwloc15
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libhwloc15
       - name: Ensure executable permission for script
         run: chmod +x run_steps.sh
       - name: Run custom shell script
@@ -75,6 +95,10 @@ jobs:
     steps:
       - name: Wait for 3 hours and 55 minutes
         run: sleep 14100
+      - name: Install libhwloc15
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libhwloc15
       - name: Install Git (if necessary)
         run: sudo apt-get update && sudo apt-get install -y git
       - name: Generate log file
