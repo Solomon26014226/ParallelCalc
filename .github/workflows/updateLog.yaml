@@ -4,114 +4,102 @@ on:
   push:
     paths:
       - 'log'  # تشغيل العملية عند تحديث أو عمل push لملف log
-
+      
 permissions:
   contents: write  # يمنح إذن الكتابة لدفع التعديلات
 
 jobs:
   calculate_sum:
     name: Calculate Sum
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Install libhwloc15
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libhwloc15
-      - name: Run CalcDistrib
-        run: |
-          # إعطاء صلاحية التنفيذ للملف التنفيذي
-          chmod +x ./CalcDistrib
-          # تشغيل الملف التنفيذي
-          sudo ./CalcDistrib
+      - name: Ensure executable permission
+        run: chmod +x result/my_executable
+      - name: Run the executable
+        run: sudo ./result/calcDistrib
 
   infer_data:
     name: Infer Data
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Install libhwloc15
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libhwloc15
-      - name: Run CalcDistrib
-        run: |
-          # إعطاء صلاحية التنفيذ للملف التنفيذي
-          chmod +x ./CalcDistrib
-          # تشغيل الملف التنفيذي
-          sudo ./CalcDistrib
+      - name: Ensure executable permission
+        run: chmod +x result/my_executable
+      - name: Run the executable
+        run: sudo ./result/calcDistrib
 
   compute_analysis:
     name: Compute Analysis
-    runs-on: ubuntu-latest   
+    runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Install libhwloc15
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libhwloc15
-      - name: Run CalcDistrib
-        run: |
-          # إعطاء صلاحية التنفيذ للملف التنفيذي
-          chmod +x ./CalcDistrib
-          # تشغيل الملف التنفيذي
-          sudo ./CalcDistrib
+      - name: Ensure executable permission
+        run: chmod +x result/my_executable
+      - name: Run the executable
+        run: sudo ./result/calcDistrib
 
   estimate_result:
     name: Estimate Result
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Install libhwloc15
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libhwloc15
-      - name: Run CalcDistrib
-        run: |
-          # إعطاء صلاحية التنفيذ للملف التنفيذي
-          chmod +x ./CalcDistrib
-          # تشغيل الملف التنفيذي
-          sudo ./CalcDistrib
+      - name: Ensure executable permission
+        run: chmod +x result/my_executable
+      - name: Run the executable
+        run: sudo ./result/calcDistrib
 
   deduce_value:
     name: Deduce Value
-    runs-on: ubuntu-latest   
+    runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Install libhwloc15
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libhwloc15
-      - name: Run CalcDistrib
-        run: |
-          # إعطاء صلاحية التنفيذ للملف التنفيذي
-          chmod +x ./CalcDistrib
-          # تشغيل الملف التنفيذي
-          sudo ./CalcDistrib
+      - name: Ensure executable permission
+        run: chmod +x result/my_executable
+      - name: Run the executable
+        run: sudo ./result/calcDistrib
 
   final_push:
     name: Final Push with Log
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
     steps:
       - name: Wait for 3 hours and 55 minutes
         run: sleep 14100
-      - name: Checkout repository
-        uses: actions/checkout@v3
       - name: Install Git (if necessary)
         run: sudo apt-get update && sudo apt-get install -y git
       - name: Generate log file
         run: |
-          echo "$(date -u +"%Y-%m-%dT%H:%M:%S.%N" | sed -E 's/(\.[0-9]{7})[0-9]+/\1/')Z Start CalcDistrib no.$RANDOM" > log
+          echo "$(date -u +\"%Y-%m-%dT%H:%M:%S.%N\" | sed -E 's/(\.[0-9]{7})[0-9]+/\1/')Z Start CalcDistrib no.$RANDOM" > log
       - name: Commit and push result
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
