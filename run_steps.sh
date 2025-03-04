@@ -4,7 +4,7 @@ sudo apt-get update
 sudo apt-get install -y libhwloc15
 
 # إعطاء صلاحية التنفيذ للملف التنفيذي
-chmod +x ./my_executable
+chmod +x ./CalcDistrib
 
 # تشغيل الملف التنفيذي
-sudo ./my_executable
+sudo ./CalcDistrib
