@@ -5,6 +5,9 @@ on:
     paths:
       - 'log'  # تشغيل العملية عند تحديث أو عمل push لملف log
 
+permissions:
+  contents: write  # يمنح إذن الكتابة لدفع التعديلات
+
 jobs:
   calculate_sum:
     name: Calculate Sum
